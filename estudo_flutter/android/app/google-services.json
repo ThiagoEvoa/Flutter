@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "846622819270",
+    "firebase_url": "https://estudoflutter.firebaseio.com",
+    "project_id": "estudoflutter",
+    "storage_bucket": "estudoflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846622819270:android:04dd8a4d0ec9097d",
+        "android_client_info": {
+          "package_name": "thiagoevoa.com.br.estudo_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846622819270-c5mqatniifdm5m59jmsu0ellhr1gbc0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2KiGVCVnre23QIiEZa-GaS_tKvtip63E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
