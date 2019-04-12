@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>235531063218-aq9e9mr1ag2l3ukod356tnobj884ft2m.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.235531063218-aq9e9mr1ag2l3ukod356tnobj884ft2m</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDxDJ3_2zQdgPT4163o_X9jHCoJQEaZVQ4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>235531063218</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>thiagoevoa.com.br.estudoFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>estudoandroid-ab3f3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>estudoandroid-ab3f3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:235531063218:ios:d6d77d7e9a2e7aa7</string>
+	<key>DATABASE_URL</key>
+	<string>https://estudoandroid-ab3f3.firebaseio.com</string>
+</dict>
+</plist>

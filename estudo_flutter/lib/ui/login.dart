@@ -1,7 +1,7 @@
+import 'package:estudo_flutter/ui/home.dart';
+import 'package:estudo_flutter/widget/custom_raisedbutton.dart';
+import 'package:estudo_flutter/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
 
 class Login extends StatefulWidget {
   @override
@@ -9,68 +9,106 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _emailFieldController = TextEditingController();
-  final _passwordFieldController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  final _emailFieldFocus = FocusNode();
-
-  _login() {
-    if (_emailFieldController.text.isEmpty) {
-      FocusScope.of(context).requestFocus(_emailFieldFocus);
+  _login(BuildContext context) {
+    if (emailController.text.isEmpty) {
+      _showSnackBar("Please, fill the e-mail field.");
+    } else if (passwordController.text.isEmpty) {
+      _showSnackBar("Please, fill the password field.");
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Home()));
     }
+  }
+
+  _showSnackBar(String text) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      backgroundColor: Colors.white,
+      content: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.blue[800]),
+      ),
+      duration: Duration(seconds: 3),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: TextField(
-                  controller: _emailFieldController,
-                  focusNode: _emailFieldFocus,
-                  cursorColor: Theme.of(context).hintColor,
-                  style: TextStyle(
-                    color: Theme.of(context).hintColor,
-                  ),
-                  decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    labelStyle: TextStyle(color: Theme.of(context).hintColor),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Theme.of(context).accentColor)),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: TextField(
-                  controller: _passwordFieldController,
-                  cursorColor: Theme.of(context).hintColor,
-                  style: TextStyle(
-                    color: Theme.of(context).hintColor,
-                  ),
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Theme.of(context).hintColor),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Theme.of(context).accentColor)),
-                  ),
-                ),
-              ),
-              RaisedButton(
-                child: Text(
-                  'login',
-                  style: TextStyle(color: Theme.of(context).hintColor),
-                ),
-                color: Theme.of(context).accentColor,
-                onPressed: _login,
-              ),
-            ],
+      key: _scaffoldKey,
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/login.jpg"),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                  Colors.transparent.withOpacity(0.3), BlendMode.dstATop),
+            ),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[100], Colors.blue],
+            ),
           ),
-        ));
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: CustomTextField(
+                    controller: emailController,
+                    textLabel: "E-mail",
+                    textColor: Colors.white,
+                    color: Colors.white,
+                    cursorColor: Colors.white,
+                    borderSideColor: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: CustomTextField(
+                    controller: passwordController,
+                    textLabel: "Password",
+                    textColor: Colors.white,
+                    color: Colors.white,
+                    cursorColor: Colors.white,
+                    borderSideColor: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: CustomRaisedButton(
+                    clicked: () {
+                      _login(context);
+                    },
+                    text: "Login",
+                    buttonColor: Colors.blue[800],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "Sign up",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
