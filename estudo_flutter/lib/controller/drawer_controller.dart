@@ -16,6 +16,10 @@ class CustomDrawerController extends InheritedWidget {
         CustomDrawerController) as CustomDrawerController;
   }
 
+  close(){
+    _streamController.close();
+  }
+
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return oldWidget != this;

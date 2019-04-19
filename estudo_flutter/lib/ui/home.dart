@@ -10,6 +10,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  void dispose() {
+    CustomDrawerController.of(context).close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomDrawerController(
       child: Scaffold(
