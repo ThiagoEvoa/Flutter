@@ -1,5 +1,6 @@
 const homePage = 0;
 const aboutPage = 1;
+const jsonContentType = {"Content-Type": "application/json"};
 
-const host = "https://study-node-mongodb.herokuapp.com/api/";
-const url_client = "${host}client";
+const host = "https://flutter-study.herokuapp.com/api/";
+const url_person = "${host}person";

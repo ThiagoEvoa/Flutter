@@ -1,5 +1,3 @@
-import 'package:estudo_flutter/controller/drawer_controller.dart';
-import 'package:estudo_flutter/ui/home.dart';
 import 'package:estudo_flutter/ui/login.dart';
 import 'package:flutter/material.dart';
 
