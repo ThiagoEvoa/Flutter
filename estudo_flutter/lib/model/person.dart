@@ -4,9 +4,9 @@ import 'package:estudo_flutter/util/constants.dart';
 import 'package:http/http.dart' as http;
 
 class Person {
-   String id;
-   String name;
-   String urlImage;
+  String id;
+  String name;
+  String urlImage;
 
   Person({this.id, this.name, this.urlImage});
 
@@ -22,7 +22,7 @@ class Person {
     return {'_id': id, 'name': name, 'url_image': urlImage};
   }
 
-  static Future<List<dynamic>> get() async {
+  static Future<dynamic> fetch() async {
     final response = await http.get(url_person);
 
     if (response.statusCode == 200) {
@@ -40,7 +40,7 @@ class Person {
             body: jsonEncode(person), headers: jsonContentType);
 
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return "Person saved.";
     } else {
       throw Exception('Failed to save person.');
     }
@@ -50,7 +50,7 @@ class Person {
     final response = await http.delete("$url_person/${person.id}");
 
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return "Person deleted.";
     } else {
       throw Exception('Failed to delete person.');
     }
