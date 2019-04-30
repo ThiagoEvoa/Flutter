@@ -1,6 +1,6 @@
 import 'package:estudo_flutter/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart/subjects.dart';
 
 class CustomDrawerController extends InheritedWidget {
   final Widget child;

@@ -1,4 +1,3 @@
-
 import 'package:estudo_flutter/controller/drawer_controller.dart';
 import 'package:estudo_flutter/ui/about_page.dart';
 import 'package:estudo_flutter/ui/list_page.dart';
@@ -15,10 +14,14 @@ class CustomPageView extends StatelessWidget {
     return StreamBuilder<int>(
       stream: CustomDrawerController.of(context).output,
       builder: ((context, snapshot) {
-        return PageView(
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[pages[snapshot.data]],
-        );
+        if (snapshot.hasData) {
+          return PageView(
+            physics: NeverScrollableScrollPhysics(),
+            children: <Widget>[pages[snapshot.data]],
+          );
+        } else {
+          return Container();
+        }
       }),
     );
   }

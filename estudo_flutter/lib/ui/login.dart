@@ -1,4 +1,4 @@
-import 'package:estudo_flutter/ui/home.dart';
+import 'package:estudo_flutter/controller/login_controller.dart';
 import 'package:estudo_flutter/widget/custom_raisedbutton.dart';
 import 'package:estudo_flutter/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -12,29 +12,6 @@ class _LoginState extends State<Login> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  _login(BuildContext context) {
-    if (emailController.text.isEmpty) {
-      _showSnackBar("Please, fill the e-mail field.");
-    } else if (passwordController.text.isEmpty) {
-      _showSnackBar("Please, fill the password field.");
-    } else {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Home()));
-    }
-  }
-
-  _showSnackBar(String text) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      backgroundColor: Colors.white,
-      content: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.blue[800]),
-      ),
-      duration: Duration(seconds: 3),
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +40,7 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: CustomTextField(
                     controller: emailController,
+                    inputType: TextInputType.emailAddress,
                     textLabel: "E-mail",
                     textColor: Colors.white,
                     color: Colors.white,
@@ -71,9 +49,11 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: CustomTextField(
                     controller: passwordController,
+                    inputType: TextInputType.number,
+                    password: true,
                     textLabel: "Password",
                     textColor: Colors.white,
                     color: Colors.white,
@@ -83,9 +63,24 @@ class _LoginState extends State<Login> {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        LoginController(_scaffoldKey).resetPassword(context, emailController.text);
+                      },
+                      child: Text(
+                        "Forget password?",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: CustomRaisedButton(
                     clicked: () {
-                      _login(context);
+                      LoginController(_scaffoldKey).login(context, emailController.text, passwordController.text);
                     },
                     text: "Login",
                     buttonColor: Colors.blue[800],
@@ -94,7 +89,9 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      LoginController(_scaffoldKey).signUp(context, emailController.text, passwordController.text)
+                    },
                     child: Text(
                       "Sign up",
                       style: TextStyle(

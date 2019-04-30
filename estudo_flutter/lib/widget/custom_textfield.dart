@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final TextInputType inputType;
+  final bool password;
   final Color color;
   final Color cursorColor;
   final Color borderSideColor;
@@ -10,6 +12,8 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField(
       {this.controller,
+      this.inputType = TextInputType.text,
+      this.password = false,
       this.color = Colors.black,
       this.cursorColor = Colors.black,
       this.borderSideColor = Colors.black,
@@ -20,6 +24,8 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      keyboardType: inputType,
+      obscureText: password,
       cursorColor: cursorColor,
       style: TextStyle(
         color: color,

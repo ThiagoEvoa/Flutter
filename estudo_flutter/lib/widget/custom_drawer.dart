@@ -1,6 +1,7 @@
 import 'package:estudo_flutter/controller/drawer_controller.dart';
 import 'package:estudo_flutter/ui/login.dart';
 import 'package:estudo_flutter/util/constants.dart';
+import 'package:estudo_flutter/util/user_firebase.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -79,8 +80,10 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                    UserFirebase().signOut().then((result) {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Login()));
+                    });
                   },
                   leading: Icon(
                     Icons.exit_to_app,
