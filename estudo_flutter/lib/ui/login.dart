@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: InkWell(
                     onTap: () {
-                      LoginController(_scaffoldKey).signUp(context, emailController.text, passwordController.text)
+                      LoginController(_scaffoldKey).signUp(context, emailController.text, passwordController.text);
                     },
                     child: Text(
                       "Sign up",
