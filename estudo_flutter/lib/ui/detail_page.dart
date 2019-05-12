@@ -1,4 +1,5 @@
 import 'package:estudo_flutter/model/person.dart';
+import 'package:estudo_flutter/service/person_service.dart';
 import 'package:estudo_flutter/widget/custom_raisedbutton.dart';
 import 'package:estudo_flutter/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   _save() {
-    Person.save(widget.person).catchError((error) {
+    PersonService.save(widget.person).catchError((error) {
       _showSnackBar(error.toString());
     }).then((result) {
       _showSnackBar(result);

@@ -1,4 +1,5 @@
 import 'package:estudo_flutter/model/person.dart';
+import 'package:estudo_flutter/service/person_service.dart';
 import 'package:estudo_flutter/ui/detail_page.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class _ListPageState extends State<ListPage> {
   }
 
   _delete(List list, int index) {
-    Person.delete(Person.fromJson(list[index])).catchError((error) {
+    PersonService.delete(Person.fromJson(list[index])).catchError((error) {
       _showSnackBar("Error while deleting person.");
     }).then(((result) {
       setState(() {
@@ -38,7 +39,7 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       body: Center(
         child: FutureBuilder(
-          future: Person.fetch(),
+          future: PersonService.fetch(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return customList(
@@ -70,7 +71,7 @@ class _ListPageState extends State<ListPage> {
             }
             return RefreshIndicator(
               onRefresh: () async {
-                await Person.fetch();
+                await PersonService.fetch();
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +104,7 @@ class _ListPageState extends State<ListPage> {
   Widget customList(List list) {
     return RefreshIndicator(
       onRefresh: () async {
-        await Person.fetch();
+        await PersonService.fetch();
       },
       child: ListView.builder(
         itemCount: list.length,
