@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:estudo_flutter/util/user_firebase.dart';
 import 'package:estudo_flutter/ui/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController {
   GlobalKey<ScaffoldState> _scaffoldKey;
-  LoginController(GlobalKey<ScaffoldState> scaffoldKey)
-      : _scaffoldKey = scaffoldKey;
+  SharedPreferences prefs;
+
+  LoginController(GlobalKey<ScaffoldState> scaffoldKey){
+    _scaffoldKey = scaffoldKey;
+    _getSharedPreferences();
+  } 
+
+  _getSharedPreferences() async{
+    prefs = await SharedPreferences.getInstance();
+  }
 
   login(BuildContext context, String email, String password) {
     if (_isValidForm(email, password)) {
@@ -13,6 +22,7 @@ class LoginController {
         _showSnackBar(error.toString());
       }).then((result) {
         if (result != null) {
+          prefs.setBool("isLogged", true);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Home()),
@@ -29,8 +39,8 @@ class LoginController {
           .catchError((error) {
         _showSnackBar(error.toString());
       }).then((result) {
-        print(result);
         if (result != null) {
+          prefs.setBool("isLogged", true);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Home()),

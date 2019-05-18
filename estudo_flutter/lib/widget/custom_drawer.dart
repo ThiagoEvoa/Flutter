@@ -3,12 +3,17 @@ import 'package:estudo_flutter/ui/login.dart';
 import 'package:estudo_flutter/util/constants.dart';
 import 'package:estudo_flutter/util/user_firebase.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CustomDrawerController _controller =
         CustomDrawerController.of(context);
+
+    _getSharedPreferences() async {
+      return await SharedPreferences.getInstance();
+    }
 
     return StreamBuilder<int>(
         stream: CustomDrawerController.of(context).output,
@@ -78,18 +83,24 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   title: Text("About"),
                 ),
-                ListTile(
-                  onTap: () {
-                    UserFirebase().signOut().then((result) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Login()));
-                    });
+                FutureBuilder(
+                  future: _getSharedPreferences(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return ListTile(
+                      onTap: () {
+                        UserFirebase().signOut().then((result) {
+                          snapshot.data.setBool("isLogged", false);
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => Login()));
+                        });
+                      },
+                      leading: Icon(
+                        Icons.exit_to_app,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      title: Text("Exit"),
+                    );
                   },
-                  leading: Icon(
-                    Icons.exit_to_app,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  title: Text("Exit"),
                 ),
               ],
             ),

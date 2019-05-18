@@ -67,7 +67,8 @@ class _LoginState extends State<Login> {
                     alignment: Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
-                        LoginController(_scaffoldKey).resetPassword(context, emailController.text);
+                        LoginController(_scaffoldKey)
+                            .resetPassword(context, emailController.text);
                       },
                       child: Text(
                         "Forget password?",
@@ -80,7 +81,8 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: CustomRaisedButton(
                     clicked: () {
-                      LoginController(_scaffoldKey).login(context, emailController.text, passwordController.text);
+                      LoginController(_scaffoldKey).login(context,
+                          emailController.text, passwordController.text);
                     },
                     text: "Login",
                     buttonColor: Colors.blue[800],
@@ -90,7 +92,8 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: InkWell(
                     onTap: () {
-                      LoginController(_scaffoldKey).signUp(context, emailController.text, passwordController.text);
+                      LoginController(_scaffoldKey).signUp(context,
+                          emailController.text, passwordController.text);
                     },
                     child: Text(
                       "Sign up",
